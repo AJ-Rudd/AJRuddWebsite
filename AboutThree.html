@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJ Rudd</title>
+  <link rel="stylesheet"
+type="text/css" href="styles.css"/>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd7YQdt-DDir-dPEYw0Qxa-KGtMB3J0_8&callback=myMap"></script>
+</head>
+<body>
+  <div id="header">
+  <div class="container">
+    <a id="header-title"
+  href ="idk.html">AJ Rudd</a>
+    <ul id="header-nav">
+      <li><a href="About.html">About/fun</a></li>
+      <li><a href="mailto:trncollective@gmail.com">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+<h1>This would be an intersting place to visit</h1>
+<div id="googleMap" style="width:100%;height:400px;"></div>
+
+<h2>I am close to here!</h2>
+<div id="googleMapTwo" style="width:100%;height:400px;"></div>
+
+<script>
+
+var json = JSON.parse('{"lat":"39.1547","lon":"-77.2405","ele":"195.9","time":"2015-12-08T08:42:33.188-05:00"}'); // replace with current location
+
+var json1 = JSON.parse('{"lat":"34.5002","lon":"112.9093","ele":"125","time":"2015-12-08T08:42:33.188-05:00"}'); // replace with destination, all we need to keep here is lat/lon
+
+var json2 = JSON.parse('{"lat":"38.9072","lon":"-77.0369","ele":"195.9","time":"2015-12-07T04:42:33.188-05:00"}'); // replace with starting coordinates
+
+var json3 = JSON.parse('{"lat":"34.4544","lon":"113.0506"}');
+
+var Center = new google.maps.LatLng(json.lat, json.lon);
+var secondCenter = new google.maps.LatLng(json3.lat,json3.lon);
+//var directionsDisplay = new google.maps.DirectionsRenderer();
+//var directionsService = new google.maps.DirectionsService();
+var map;
+var properties = {
+center: Center,
+zoom: 7,
+mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+
+map = new google.maps.Map(document.getElementById("googleMapTwo"), properties);
+//directionsDisplay.setMap(map);
+
+var marker = new google.maps.Marker({
+position: new google.maps.LatLng(json2.lat, json2.lon),
+map: map,
+title: 'Where I grew up'
+});
+
+marker.setMap(map);
+
+var secondProp = {
+  center: secondCenter,
+  zoom: 7,
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+
+mapTwo = new google.maps.Map(document.getElementById("googleMap"), secondProp);
+
+var markerTwo = new google.maps.Marker ({
+  position: new google.maps.LatLng(json1.lat, json1.lon),
+  map: mapTwo,
+  title: "Mount Song"
+});
+
+markerTwo.setMap(mapTwo);
+</script>
+<h2 id='userName'></h2>
+<form action="http://example.org/">
+    <label for="yourName">Enter Your name:</label>
+    <input type="text" id="yourName"/>
+<p id = information></p>
+<div id = "extra"></div>
+<script>
+    var nameInput, yourName, newText, target;
+    nameInput = document.getElementById('userName');
+    yourName = document.getElementById('yourName');
+
+
+    function writeLabelTwo(e) {                         // Declare function
+        if (!e) {                                      // If event object not present
+          e = window.event;                            // Use IE5-8 fallback
+        }
+        target = e.target || e.srcElement;             // Get target of event
+        newText = "Hello " + target.value + " This is a webpage";                    // Value of that element
+        nameInput.textContent = newText;            // Update note text
+      }
+
+      yourName.addEventListener('input', writeLabelTwo, false);
+
+      var info = JSON.parse('{"firstname":"AJ","lastname":"Rudd","school":"UMD","study":"HCIM"}');
+      var newContent = '';
+      var name = "My name is " + " " + info.firstname +  " " + info.lastname;
+      document.getElementById('information').innerHTML = name;
+      var realName = info.firstname;
+      if (JSON.stringify(realName).includes('AJ')) {
+          newContent += '<p>' + 'I am currently obtaining a Masters degree in ' + info.study + ' ' + 'at ' + info.school + '</p>';
+      } else if (JSON.stringify(realName).includes('David')) {
+        newContent += '<p>' + "Don't ask" + "</p>";
+      }
+      document.getElementById("extra").innerHTML = newContent;
+    </script>
+</body>
+</html>
